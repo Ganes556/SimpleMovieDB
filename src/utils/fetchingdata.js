@@ -1,4 +1,4 @@
-const key = process.env.API_KEY;
+const key = import.meta.env.API_KEY;
 const baseUrl = 'https://api.themoviedb.org';
 
 export async function getUpcomming(page = 1) {
@@ -30,13 +30,6 @@ export async function getDetail(id) {
   const data = await fetch(
     `${baseUrl}/3/movie/${id}?api_key=${key}&language=en-US`
   );
-
-  // switch (data.status) {
-  //   case 404:
-  //   case 401:
-  //   case 422:
-  //     throw data;
-  // }
 
   return data.json();
 }
