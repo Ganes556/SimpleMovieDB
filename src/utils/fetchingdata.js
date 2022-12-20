@@ -1,5 +1,5 @@
-const key = import.meta.env.API_KEY;
-const baseUrl = 'https://api.themoviedb.org';
+const key = import.meta.env.VITE_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export async function getUpcomming(page = 1) {
   const data = await fetch(
