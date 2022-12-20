@@ -4,7 +4,7 @@ import React from 'react';
 
 function NotFoundPage() {
   return (
-    <Container sx={{ height: '100vh', backgroundColor: 'red' }}>
+    <Container sx={{ display: 'flex', height: '100vh' }}>
       <Typography component={'div'} sx={{ m: 'auto' }} variant='h5'>
         404 | Not Found!
       </Typography>

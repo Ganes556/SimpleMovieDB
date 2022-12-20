@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   IconButton,
@@ -22,7 +21,18 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600,
+  display: 'flex',
+  flexDirection: {
+    xs: 'column',
+    sm: 'row',
+  },
+  gap: '1rem',
+  width: { xs: '90%', sm: 600 },
+  overflowY: { xs: 'scroll', sm: 'hidden' },
+  height: {
+    xs: '50%',
+    sm: 'auto',
+  },
   border: `1px solid ${grey[400]}`,
   p: 4,
 };
@@ -40,7 +50,7 @@ function DetailModal({ useReduceModal }) {
         aria-labelledby='keep-mounted-modal-title'
         aria-describedby='keep-mounted-modal-description'
       >
-        <Card sx={{ ...style, display: 'flex', gap: '1rem' }}>
+        <Card sx={{ ...style }}>
           <Stack margin={'auto'}>
             <CardMedia
               component={'img'}

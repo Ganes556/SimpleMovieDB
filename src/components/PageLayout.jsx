@@ -1,40 +1,12 @@
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  CircularProgress,
-  Container,
-  Modal,
-  Typography,
-} from '@mui/material';
-import { blue, blueGrey, grey, lightBlue, red } from '@mui/material/colors';
-import { Box } from '@mui/system';
+import { Container, Modal, Typography } from '@mui/material';
 import React, { lazy, Suspense, useReducer, useState } from 'react';
-import DetailModal from './DetailModal';
+import CircularProgressCentering from './CircularProgressCentering';
 
+const DetailModal = lazy(() => import('./DetailModal'));
 const SearchAppBar = lazy(() => import('./SearchAppBar'));
 const Outlet = lazy(async () =>
   import('react-router-dom').then((module) => ({ default: module['Outlet'] }))
 );
-
-function CircularProgressCentering() {
-  return (
-    <>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    </>
-  );
-}
 
 function reducer(state, action) {
   if (action.type === 'open') {
@@ -54,9 +26,11 @@ function PageLayout() {
     <Container maxWidth={'xl'} sx={{ padding: '0' }} disableGutters>
       <Suspense fallback={<CircularProgressCentering />}>
         <SearchAppBar setSearch={setSearch} />
-        <Outlet context={[dispatch]} />
+        <Outlet context={[dispatch, search]} />
+        {state?.open && (
+          <DetailModal useReduceModal={() => [state, dispatch]} />
+        )}
       </Suspense>
-      {state?.open && <DetailModal useReduceModal={() => [state, dispatch]} />}
     </Container>
   );
 }

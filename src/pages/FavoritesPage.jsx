@@ -1,13 +1,11 @@
-import { Box, Container, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
-import { Stack } from '@mui/system';
-import { createContext, useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Container, Typography } from '@mui/material';
+import { useOutletContext } from 'react-router-dom';
 import CardList from '../components/CardList';
 import useFavorites from '../hooks/useFavorites';
 
 function FavoritesPage() {
   const [favorites, setFavorites] = useFavorites();
+  const [, search] = useOutletContext();
   return (
     <Container
       sx={{
@@ -17,7 +15,9 @@ function FavoritesPage() {
     >
       {favorites.length > 0 && (
         <CardList
-          favorites={favorites}
+          favorites={favorites.filter((e) =>
+            e.title.toLowerCase().includes(search || '')
+          )}
           setFavorites={setFavorites}
           pageFavorite={true}
         />

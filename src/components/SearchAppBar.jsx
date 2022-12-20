@@ -12,7 +12,14 @@ import { Drawer } from '@mui/material';
 
 import { useEffect, useState } from 'react';
 import DrawerContent from './DrawerContent';
-import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  matchPath,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+  useSubmit,
+} from 'react-router-dom';
 import { Container, Stack } from '@mui/system';
 
 const Search = styled('div')(({ theme }) => ({
@@ -61,7 +68,7 @@ export default function SearchAppBar({ setSearch }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
+  const submit = useSubmit();
   return (
     <>
       <AppBar
@@ -140,11 +147,16 @@ export default function SearchAppBar({ setSearch }) {
               Favorite
             </Link>
           </Box>
-          <Search onChange={(v) => setSearch(v.target.value)}>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              name='search'
+              onChange={(v) => {
+                // submit(v.currentTarget);
+                setSearch(v.target.value);
+              }}
               placeholder='Search…'
               inputProps={{ 'aria-label': 'search' }}
             />
