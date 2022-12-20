@@ -1,4 +1,4 @@
-const key = `93a9765f28fef8f667072740d1a49248`;
+const key = process.env.API_KEY;
 const baseUrl = 'https://api.themoviedb.org';
 
 export async function getUpcomming(page = 1) {
